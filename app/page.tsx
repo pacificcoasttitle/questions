@@ -476,14 +476,14 @@ export default function AssessmentWizard() {
   const progress = (currentStep / totalSteps) * 100
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-amber-50/30 to-blue-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-stone-50/50 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Header */}
         <div className="mb-8 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-blue-900 dark:text-blue-100 mb-2 text-balance">
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-slate-100 mb-2 text-balance">
             Pacific Coast Title
           </h1>
-          <p className="text-blue-700 dark:text-blue-300 text-lg">Sales Tool Competency Assessment</p>
+          <p className="text-slate-600 dark:text-slate-300 text-lg">Sales Tool Competency Assessment</p>
         </div>
 
         {/* Progress Bar */}
@@ -497,7 +497,7 @@ export default function AssessmentWizard() {
             </div>
             <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-blue-600 via-blue-500 to-accent dark:from-blue-500 dark:via-blue-400 dark:to-accent transition-all duration-300 ease-out"
+                className="h-full bg-gradient-to-r from-slate-500 via-slate-400 to-stone-400 dark:from-slate-500 dark:via-slate-400 dark:to-stone-500 transition-all duration-300 ease-out"
                 style={{ width: `${progress}%` }}
               />
             </div>

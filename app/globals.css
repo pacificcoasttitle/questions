@@ -4,30 +4,30 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Enhanced color palette with complementary warm accent colors */
-  --background: oklch(0.99 0.005 240);
-  --foreground: oklch(0.15 0.02 240);
+  /* Softened color palette - easier on the eyes */
+  --background: oklch(0.985 0.003 240);
+  --foreground: oklch(0.25 0.015 240);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.02 240);
+  --card-foreground: oklch(0.25 0.015 240);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.02 240);
-  --primary: oklch(0.42 0.15 250);
+  --popover-foreground: oklch(0.25 0.015 240);
+  --primary: oklch(0.52 0.08 250);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.58 0.15 250);
+  --secondary: oklch(0.62 0.06 250);
   --secondary-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.96 0.005 240);
-  --muted-foreground: oklch(0.5 0.02 240);
-  --accent: oklch(0.7 0.16 40); /* Warm amber accent */
-  --accent-foreground: oklch(0.1 0.02 40);
-  --success: oklch(0.65 0.18 160); /* Teal success */
+  --muted: oklch(0.97 0.003 240);
+  --muted-foreground: oklch(0.55 0.015 240);
+  --accent: oklch(0.75 0.10 45); /* Soft warm accent */
+  --accent-foreground: oklch(0.2 0.015 45);
+  --success: oklch(0.68 0.12 160); /* Soft teal success */
   --success-foreground: oklch(0.98 0 0);
-  --warning: oklch(0.75 0.15 70); /* Warm yellow-orange */
-  --warning-foreground: oklch(0.15 0.02 70);
-  --destructive: oklch(0.55 0.25 27);
+  --warning: oklch(0.78 0.10 70); /* Soft warm yellow-orange */
+  --warning-foreground: oklch(0.2 0.015 70);
+  --destructive: oklch(0.58 0.15 27);
   --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.9 0.01 240);
-  --input: oklch(0.9 0.01 240);
-  --ring: oklch(0.42 0.15 250);
+  --border: oklch(0.92 0.005 240);
+  --input: oklch(0.92 0.005 240);
+  --ring: oklch(0.52 0.08 250);
   --chart-1: oklch(0.55 0.2 250);
   --chart-2: oklch(0.7 0.16 40); /* Amber */
   --chart-3: oklch(0.65 0.18 160); /* Teal */
