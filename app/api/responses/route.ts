@@ -66,7 +66,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const limit = Math.min(parseInt(searchParams.get('limit') || '50'), 100);
     const offset = parseInt(searchParams.get('offset') || '0');
-    const result = await query(`SELECT id, respondent_name, respondent_email, submitted_at, capability_score, avg_confidence_score FROM responses ORDER BY submitted_at DESC LIMIT $1 OFFSET $2`, [limit, offset]);
+    const result = await query(`SELECT * FROM responses ORDER BY submitted_at DESC LIMIT $1 OFFSET $2`, [limit, offset]);
     const count = await query('SELECT COUNT(*) FROM responses');
     return NextResponse.json({ responses: result.rows, total: parseInt(count.rows[0].count) });
   } catch (error) {
