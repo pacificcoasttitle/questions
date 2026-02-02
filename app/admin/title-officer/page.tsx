@@ -106,9 +106,19 @@ export default function TitleOfficerAdminPage() {
     scoredBy: string;
   } | null>(null);
   const [saving, setSaving] = useState(false);
+  
+  // Secondary password protection
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   useEffect(() => {
-    fetchEvaluations();
+    // Check if already unlocked via session storage
+    const unlocked = sessionStorage.getItem('pct_title_officer_unlocked') === 'true';
+    if (unlocked) {
+      setIsUnlocked(true);
+      fetchEvaluations();
+    }
   }, []);
 
   const fetchEvaluations = () => {
@@ -119,6 +129,18 @@ export default function TitleOfficerAdminPage() {
         setLoading(false);
       })
       .catch(() => setLoading(false));
+  };
+
+  const handlePasswordSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === 'Savant17') {
+      sessionStorage.setItem('pct_title_officer_unlocked', 'true');
+      setIsUnlocked(true);
+      setPasswordError('');
+      fetchEvaluations();
+    } else {
+      setPasswordError('Incorrect password');
+    }
   };
 
   const toggleExpand = (id: number) => {
@@ -207,14 +229,83 @@ export default function TitleOfficerAdminPage() {
     return (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1);
   };
 
+  // Password gate
+  if (!isUnlocked) {
+    return (
+      <AdminLayout currentPage="title-officer">
+        <div className="max-w-md mx-auto mt-12">
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
+            <div className="text-center mb-6">
+              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h2 className="text-xl font-bold text-slate-800">Title Officer Evaluations</h2>
+              <p className="text-slate-500 text-sm mt-1">This section requires additional authorization</p>
+            </div>
+            
+            <form onSubmit={handlePasswordSubmit} className="space-y-4">
+              <div>
+                <label htmlFor="to-password" className="block text-sm font-medium text-slate-700 mb-1">
+                  Enter Password
+                </label>
+                <input
+                  id="to-password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                  autoFocus
+                />
+              </div>
+              
+              {passwordError && (
+                <div className="bg-red-50 text-red-700 px-4 py-2 rounded-lg text-sm">
+                  {passwordError}
+                </div>
+              )}
+              
+              <button
+                type="submit"
+                className="w-full py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-lg transition-colors"
+              >
+                Unlock Section
+              </button>
+            </form>
+          </div>
+        </div>
+      </AdminLayout>
+    );
+  }
+
   return (
     <AdminLayout currentPage="title-officer">
       <div className="space-y-6">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-amber-900 dark:text-amber-100">Title Officer Evaluations</h1>
-          <p className="text-stone-600 dark:text-stone-300 mt-1">
-            {evaluations.length} evaluation{evaluations.length !== 1 ? 's' : ''} submitted
+        {/* Header */}
+        <div>
+          <h1 className="text-3xl font-bold text-slate-800">Title Officer Evaluations</h1>
+          <p className="text-slate-600 mt-1">
+            {loading ? 'Loading...' : `${evaluations.length} evaluation${evaluations.length !== 1 ? 's' : ''} submitted`}
           </p>
+        </div>
+
+        {/* Survey Link */}
+        <div className="bg-amber-50 rounded-xl p-4 border border-amber-200 flex items-center justify-between">
+          <div>
+            <span className="text-amber-700 font-medium">Survey Link:</span>
+            <code className="ml-2 bg-white px-2 py-1 rounded text-amber-800">
+              {typeof window !== 'undefined' ? window.location.origin : ''}/title-officer
+            </code>
+          </div>
+          <a 
+            href="/title-officer" 
+            target="_blank" 
+            className="text-amber-700 hover:text-amber-800 font-medium text-sm"
+          >
+            Open Survey →
+          </a>
         </div>
 
         {/* Scoring Legend */}
