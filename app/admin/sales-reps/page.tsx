@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import AdminLayout from '../components/AdminLayout';
 
 type SalesRep = {
   id: number;
@@ -137,17 +138,9 @@ export default function SalesRepsAdminPage() {
     navigator.clipboard.writeText(url);
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-slate-50 p-8 flex items-center justify-center">
-        <div className="text-slate-600">Loading sales reps...</div>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 p-8">
-      <div className="max-w-6xl mx-auto">
+    <AdminLayout currentPage="sales-reps">
+      <div className="space-y-6">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
@@ -342,22 +335,7 @@ export default function SalesRepsAdminPage() {
           )}
         </div>
 
-        {/* Quick Links */}
-        <div className="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-200">
-          <h3 className="font-medium text-blue-900 mb-2">Quick Links</h3>
-          <div className="flex flex-wrap gap-4 text-sm">
-            <a href="/admin/client-responses" className="text-blue-700 hover:underline">
-              View Client Responses →
-            </a>
-            <a href="/admin" className="text-blue-700 hover:underline">
-              Sales Rep Assessments →
-            </a>
-            <a href="/admin/title-officer" className="text-blue-700 hover:underline">
-              Title Officer Evaluations →
-            </a>
-          </div>
-        </div>
       </div>
-    </div>
+    </AdminLayout>
   );
 }

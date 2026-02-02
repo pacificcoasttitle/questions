@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import AdminLayout from '../components/AdminLayout';
 
 const TOOLS = [
   {
@@ -153,17 +154,9 @@ export default function ClientResponsesAdminPage() {
     return needs;
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-slate-50 p-8 flex items-center justify-center">
-        <div className="text-slate-600">Loading responses...</div>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 p-8">
-      <div className="max-w-7xl mx-auto">
+    <AdminLayout currentPage="client-responses">
+      <div className="space-y-6">
         {/* Header */}
         <div className="flex justify-between items-start mb-6">
           <div>
@@ -186,21 +179,6 @@ export default function ClientResponsesAdminPage() {
                 ))}
               </select>
             </div>
-          </div>
-        </div>
-
-        {/* Quick Links */}
-        <div className="mb-6 p-4 bg-blue-50 rounded-xl border border-blue-200">
-          <div className="flex flex-wrap gap-4 text-sm">
-            <a href="/admin/sales-reps" className="text-blue-700 hover:underline font-medium">
-              ← Manage Sales Reps
-            </a>
-            <a href="/admin" className="text-blue-700 hover:underline">
-              Sales Rep Assessments
-            </a>
-            <a href="/admin/title-officer" className="text-blue-700 hover:underline">
-              Title Officer Evaluations
-            </a>
           </div>
         </div>
 
@@ -361,7 +339,7 @@ export default function ClientResponsesAdminPage() {
             );
           })}
 
-          {responses.length === 0 && (
+          {responses.length === 0 && !loading && (
             <div className="bg-white rounded-xl shadow-sm p-12 text-center">
               <div className="text-slate-500 text-lg">
                 {filterRep ? 'No responses from this sales rep yet' : 'No client responses yet'}
@@ -373,6 +351,6 @@ export default function ClientResponsesAdminPage() {
           )}
         </div>
       </div>
-    </div>
+    </AdminLayout>
   );
 }

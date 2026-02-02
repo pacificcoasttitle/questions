@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import AdminLayout from '../components/AdminLayout';
 
 const SECTIONS = [
   {
@@ -206,17 +207,9 @@ export default function TitleOfficerAdminPage() {
     return (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1);
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-amber-50 dark:bg-stone-900 p-8 flex items-center justify-center">
-        <div className="text-amber-800 dark:text-amber-200">Loading evaluations...</div>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-50 to-amber-100 dark:from-stone-950 dark:via-stone-900 dark:to-amber-950 p-8">
-      <div className="max-w-7xl mx-auto">
+    <AdminLayout currentPage="title-officer">
+      <div className="space-y-6">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-amber-900 dark:text-amber-100">Title Officer Evaluations</h1>
           <p className="text-stone-600 dark:text-stone-300 mt-1">
@@ -434,13 +427,13 @@ export default function TitleOfficerAdminPage() {
             );
           })}
 
-          {evaluations.length === 0 && (
+          {evaluations.length === 0 && !loading && (
             <div className="bg-white dark:bg-stone-800 rounded-xl shadow-sm p-12 text-center">
               <div className="text-stone-500 dark:text-stone-400 text-lg">No evaluations submitted yet</div>
             </div>
           )}
         </div>
       </div>
-    </div>
+    </AdminLayout>
   );
 }
