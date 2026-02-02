@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { query } from '@/lib/db-title-officer';
+import { query } from '@/lib/db-client';
 
 const TOOL_MAP: Record<string, { prefix: string; questions: number }> = {
   'title-profile': { prefix: 'tp', questions: 5 },
